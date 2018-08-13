@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: eureka-consumer
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+
+server:
+  port: 8081
+
+
+eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 1
+#    leaseExpirationDurationInSeconds: 2
+##    statusPageUrlPath: ${management.context-path}/info
+##    healthCheckUrlPath: ${management.context-path}/health
+##    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+##    homePageUrl: https://${eureka.hostname}/
+#    statusPageUrl: https://${eureka.hostname}/info
+#    healthCheckUrl: https://${eureka.hostname}/health
+#    homePageUrl: https://${eureka.hostname}/
+  client:
+#    healthcheck:
+#        enabled: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+
