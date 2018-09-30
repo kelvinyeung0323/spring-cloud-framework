@@ -8,7 +8,8 @@ package com.taurus.commons.web.response;
 public enum ErrorCode {
 
     //概据需要添加
-    UNKOWN_ERROR(2001, "未知错误");
+    UNKOWN_ERROR(2001, "未知错误"),
+    NOT_FOUND(404, "Not Found");
 
     int code;
     String msg;

@@ -1,6 +1,7 @@
 package com.taurus.commons.web.request;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -8,16 +9,13 @@ import java.util.HashMap;
  * @createdAt: 2018/9/26
  * @description:
  */
-public class PaginationRequest<T> extends HashMap<String,Object>{
+public class PaginationRequest implements Serializable{
     /**每页记录数**/
     private Integer pageSize;
     /**页码*/
     private Integer pageNum;
     /**排序*/
     private String sort;
-
-    private T object;
-
 
     public Integer getPageSize() {
         return pageSize;
@@ -43,11 +41,4 @@ public class PaginationRequest<T> extends HashMap<String,Object>{
         this.sort = sort;
     }
 
-    public T getObject() {
-        return object;
-    }
-
-    public void setObject(T object) {
-        this.object = object;
-    }
 }

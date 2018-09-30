@@ -1,12 +1,15 @@
 package com.taurus.cloud.producer.controller;
 
 import com.taurus.cloud.producer.entity.User;
+import com.taurus.cloud.producer.vo.UserVO;
+import com.taurus.commons.web.exception.ServiceException;
 import com.taurus.commons.web.request.PaginationRequest;
+import com.taurus.commons.web.response.ErrorCode;
 import com.taurus.commons.web.response.PaginationResult;
+import com.taurus.commons.web.response.ResponseResult;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -26,14 +29,6 @@ import java.util.UUID;
 public class UserController {
 
 
-    @GetMapping("/user/{userName}")
-    public User getUser(@PathVariable("userName") String userName){
-        User user = new User();
-        user.setUserName(userName);
-        user.setId(UUID.randomUUID().toString().replace("-","").toUpperCase());
-        user.setPassowrd("password");
-        return user;
-    }
 
     @ApiOperation(value = "获取用户", notes = "获取所有用户信息", produces = "application/json")
     @ApiImplicitParams({
@@ -44,10 +39,23 @@ public class UserController {
             @ApiImplicitParam(paramType = "query", name = "password", value = "密码", required = true, dataType = "String")
     })
     @GetMapping("/users")
-    public PaginationResult users(@RequestBody PaginationRequest<User> requestBody, HttpServletRequest request){
-        request.getParameterMap();
+    //注意，这里参数对象不加@RequestBody注解，如果是post请求把json对像post过来则需要@RequestBody注解，如果是get方法把成员属性附加在url上，则不加@RquestBody
+    public PaginationResult users(UserVO userVO, PaginationRequest pagination){
         return new PaginationResult().page(100L,20,3,new ArrayList());
     }
 
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable("id") String userName){
+        User user = new User();
+        user.setUserName(userName);
+        user.setId(UUID.randomUUID().toString().replace("-","").toUpperCase());
+        user.setPassowrd("password");
+        return user;
+    }
 
+
+    @GetMapping("/user/exception")
+    public ResponseResult exception(){
+        throw new ServiceException("service exception", ErrorCode.UNKOWN_ERROR);
+    }
 }

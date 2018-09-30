@@ -9,7 +9,7 @@ import com.taurus.commons.web.response.ErrorCode;
  */
 public class ServiceException extends RuntimeException {
 
-    public ErrorCode errorCode;
+    private ErrorCode errorCode;
 
     public ServiceException() {
     }
@@ -36,4 +36,12 @@ public class ServiceException extends RuntimeException {
 
     }
 
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(ErrorCode errorCode) {
+        this.errorCode = errorCode;
+    }
 }

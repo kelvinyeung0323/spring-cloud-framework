@@ -1,5 +1,7 @@
 package com.taurus.commons.web.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * @createdAt: 2018/9/26
  * @description: 响应结果实体
  */
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult implements Serializable{
 
 
@@ -58,11 +60,11 @@ public class ResponseResult implements Serializable{
     }
 
     public static ResponseResult fail(String errorCode) {
-        return new ResponseResult(STATUS_FAIL, "", "",null);
+        return new ResponseResult(STATUS_FAIL, "", "",errorCode);
     }
 
     public static ResponseResult fail(String errorCode, String message) {
-        return new ResponseResult(STATUS_FAIL, message, "",null);
+        return new ResponseResult(STATUS_FAIL, message, "",errorCode);
     }
 
 
